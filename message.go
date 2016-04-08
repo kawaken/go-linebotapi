@@ -4,6 +4,15 @@ import (
 	"net/http"
 )
 
+const EndPointURL = "https://trialbot-api.line.me/v1/events"
+
+var DefaultHeaders = map[string]interface{}{
+	"Content-Type":                 "application/json; charset=UTF-8",
+	"X-Line-ChannelID":             0,
+	"X-Line-ChannelSecret":         "",
+	"X-Line-Trusted-User-With-ACL": "",
+}
+
 const (
 	ContentTypeText     = 1
 	ContentTypeImage    = 2
