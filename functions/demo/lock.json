@@ -1,5 +1,5 @@
 {
-    "memo": "015f008b0b78195fd921c4e6dae9f150a2be378368578c5c93e925615e5914aa",
+    "memo": "99307794ef92f366dfebfe28d650a56d6d8c9d3874d851007d68bbbae9601351",
     "projects": [
         {
             "name": "github.com/apex/go-apex",
@@ -10,9 +10,35 @@
             ]
         },
         {
+            "name": "github.com/aws/aws-sdk-go",
+            "version": "v1.7.1",
+            "revision": "1bd588c8b2dba4da57dd4664b2b2750d260a5915",
+            "packages": [
+                "aws",
+                "aws/session",
+                "service/dynamodb"
+            ]
+        },
+        {
             "name": "github.com/fujiwara/ridge",
             "branch": "master",
             "revision": "3a096f26eca7c15e7995143e2898c084d113a0ed",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/go-ini/ini",
+            "version": "v1.25.2",
+            "revision": "74bdc99692c3408cb103221e38675ce8fda0a718",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/jmespath/go-jmespath",
+            "version": "0.2.2",
+            "revision": "3433f3ea46d9f8019119e7dd41274e112a2359a9",
             "packages": [
                 "."
             ]
