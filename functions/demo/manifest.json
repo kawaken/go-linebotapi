@@ -1,0 +1,7 @@
+{
+    "dependencies": {
+        "github.com/kawaken/rod": {
+            "branch": "master"
+        }
+    }
+}

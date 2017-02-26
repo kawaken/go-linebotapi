@@ -1,0 +1,9 @@
+{
+  "name": "linebot-demo",
+  "description": "linebot demo",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::218010143316:role/linebot-demo_lambda_function",
+  "environment": {},
+  "runtime": "golang"
+}

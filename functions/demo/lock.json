@@ -1,0 +1,54 @@
+{
+    "memo": "015f008b0b78195fd921c4e6dae9f150a2be378368578c5c93e925615e5914aa",
+    "projects": [
+        {
+            "name": "github.com/apex/go-apex",
+            "branch": "master",
+            "revision": "b962b607b3e7d00b001f91f8fc2c2f247b10df74",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/fujiwara/ridge",
+            "branch": "master",
+            "revision": "3a096f26eca7c15e7995143e2898c084d113a0ed",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/kawaken/rod",
+            "branch": "master",
+            "revision": "bc652d4fc534503ec9617d448a6859092975b723",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/line/line-bot-sdk-go",
+            "branch": "master",
+            "revision": "4984f0f7a70400e41ca3b9d5af461de9a8abe43f",
+            "packages": [
+                "linebot"
+            ]
+        },
+        {
+            "name": "github.com/pkg/errors",
+            "version": "v0.8.0",
+            "revision": "645ef00459ed84a119197bfb8d8205042c6df63d",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "golang.org/x/net",
+            "branch": "master",
+            "revision": "10c134ea0df15f7e34d789338c7a2d76cc7a3ab9",
+            "packages": [
+                "context",
+                "context/ctxhttp"
+            ]
+        }
+    ]
+}
