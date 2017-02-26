@@ -1,0 +1,29 @@
+{
+    "memo": "cfa090a41783306b3d5f6b3815a105f526a4b76bbab9b0a92c429e502a510948",
+    "projects": [
+        {
+            "name": "github.com/apex/go-apex",
+            "branch": "master",
+            "revision": "b962b607b3e7d00b001f91f8fc2c2f247b10df74",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/fujiwara/ridge",
+            "branch": "master",
+            "revision": "3a096f26eca7c15e7995143e2898c084d113a0ed",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/pkg/errors",
+            "version": "v0.8.0",
+            "revision": "3866ebc348c54054262feae422da428fe6cf147d",
+            "packages": [
+                "."
+            ]
+        }
+    ]
+}
