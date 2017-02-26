@@ -1,0 +1,4 @@
+*.go
+/vendor/
+lock.json
+manifest.json
