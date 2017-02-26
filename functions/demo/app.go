@@ -12,7 +12,7 @@ import (
 func main() {
 	logger := log.New(os.Stderr, "", log.Lshortfile)
 
-	handler, err := rod.New(os.Getenv("CHANNEL_SECRET"), os.Getenv("CHANNEL_TOKEN"))
+	handler, err := rod.New(os.Getenv("BOT_CHANNEL_SECRET"), os.Getenv("BOT_CHANNEL_TOKEN"))
 	if err != nil {
 		logger.Print(err)
 		return
