@@ -54,17 +54,17 @@ func grant(params url.Values) (*authzResponse, error) {
 	}
 	defer resp.Body.Close()
 
-	var ar *authzResponse
+	var ar authzResponse
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal(b, ar)
+	err = json.Unmarshal(b, &ar)
 	if err != nil {
 		return nil, err
 	}
 
-	return ar, nil
+	return &ar, nil
 }
 
 func getProfile(token string) (*profile, error) {
@@ -82,17 +82,17 @@ func getProfile(token string) (*profile, error) {
 	}
 	defer resp.Body.Close()
 
-	var p *profile
+	var p profile
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal(b, p)
+	err = json.Unmarshal(b, &p)
 	if err != nil {
 		return nil, err
 	}
 
-	return p, nil
+	return &p, nil
 }
 
 func saveUser(ar *authzResponse, p *profile) error {
