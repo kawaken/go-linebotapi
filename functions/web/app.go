@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -118,6 +119,9 @@ func saveUser(ar *authzResponse, p *profile) error {
 			},
 			"expired_in": {
 				N: aws.String(strconv.Itoa(ar.ExpiresIn)),
+			},
+			"registered_at": {
+				N: aws.String(strconv.FormatInt(time.Now().Unix(), 10)),
 			},
 		},
 	}
