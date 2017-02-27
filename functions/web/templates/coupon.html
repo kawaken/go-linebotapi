@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>焼肉クーポンキャンペーン</title>
+
+    <style>
+        body {
+            text-align: center;
+        }
+        
+        body::after {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            z-index: -1;
+            content: url('{{.StaticURL}}/btn_login_hover.png') url('{{.StaticURL}}/btn_login_press.png');
+        }
+        
+        h1 {
+            font-size: 1.5 rem;
+        }
+        
+        div.banner {
+            height: 100px;
+            background-image: url('{{.StaticURL}}/yakiniku2.jpg');
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+    <script src="{{.StaticURL}}/qrcode.min.js"></script>
+</head>
+
+<body>
+    <h1>50%オフクーポン</h1>
+    <div class="banner"></div>
+    <div>
+        <p>以下のQRコードをレジでかざしてください</p>
+        <div id="qrcode"></div>
+    </div>
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrcode"), "{{.CouponURL}}");
+    </script>
+</body>
+
+</html>

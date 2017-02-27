@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -16,6 +17,7 @@ type user struct {
 	UserID       string
 	DisplayName  string
 	RegisteredAt string
+	Hash         string
 }
 
 func getUser(userID string) (*user, error) {
@@ -28,7 +30,7 @@ func getUser(userID string) (*user, error) {
 		TableName: aws.String("users"),
 		Key: map[string]*dynamodb.AttributeValue{
 			"user_id": {
-				N: aws.String(userID),
+				S: aws.String(userID),
 			},
 		},
 	}
@@ -40,13 +42,49 @@ func getUser(userID string) (*user, error) {
 	}
 
 	u := &user{
-		UserID:       userID,
-		DisplayName:  *resp.Item["display_name"].S,
-		RegisteredAt: *resp.Item["registered_at"].N,
+		UserID: userID,
+	}
+
+	if len(resp.Item) > 0 {
+		if dn, ok := resp.Item["display_name"]; ok {
+			u.DisplayName = *dn.S
+		}
+		if ra, ok := resp.Item["registered_at"]; ok {
+			u.RegisteredAt = *ra.N
+		}
+		if h, ok := resp.Item["hash"]; ok {
+			u.Hash = *h.S
+		}
 	}
 
 	return u, nil
 }
+
+/*
+func hasCoupons(userID string) (bool, error) {
+	svc, err := newService()
+	if err != nil {
+		return false, err
+	}
+
+	params := &dynamodb.GetItemInput{
+		TableName: aws.String("coupons"),
+		Key: map[string]*dynamodb.AttributeValue{
+			"user_id": {
+				S: aws.String(userID),
+			},
+		},
+	}
+
+	// GetItemの実行
+	resp, err := svc.GetItem(params)
+	if err != nil {
+		return false, err
+	}
+
+	return (len(resp.Item) > 0), nil
+}
+*/
 
 func main() {
 	logger := log.New(os.Stderr, "", log.Lshortfile)
@@ -63,7 +101,40 @@ func main() {
 
 		switch m.Text {
 		case "クーポン":
-			messages = append(messages, &linebot.TextMessage{Text: "クーポンがありません"})
+			if e.Source.Type != linebot.EventSourceTypeUser {
+				return nil
+			}
+
+			user, err := getUser(e.Source.UserID)
+			if err != nil {
+				log.Print(err.Error())
+				return nil
+			}
+
+			if user.RegisteredAt != "" {
+				t := os.Getenv("WEB_STATIC_BASE_URL") + "/yakiniku2.jpg"
+				q := fmt.Sprintf("%s?t=%s", os.Getenv("WEB_COUPON_URL"), user.Hash)
+				messages = append(messages,
+					linebot.NewTemplateMessage("クーポン",
+						linebot.NewButtonsTemplate(t, "50%オフクーポン", "お会計時に料金の50%を割引いたします。",
+							linebot.NewURITemplateAction("使用する(QRコードを表示)", q),
+						),
+					),
+				)
+			} else {
+				messages = append(messages,
+					linebot.NewTextMessage("クーポンがありません\nキャンペーンに応募してゲットしよう!!!"),
+					linebot.NewTextMessage(os.Getenv("WEB_CAMPAIGN_URL")),
+				)
+			}
+		case "キャンペーン":
+			if e.Source.Type != linebot.EventSourceTypeUser {
+				return nil
+			}
+			messages = append(messages,
+				linebot.NewTextMessage("クーポンをゲットしよう!!!"),
+				linebot.NewTextMessage(os.Getenv("WEB_CAMPAIGN_URL")),
+			)
 		}
 
 		return messages
@@ -73,6 +144,7 @@ func main() {
 		user, err := getUser(userID)
 		if err != nil {
 			log.Print(err.Error())
+			return nil
 		}
 
 		messages := []linebot.Message{
@@ -80,7 +152,7 @@ func main() {
 		}
 
 		if user.RegisteredAt != "" {
-			tm := `キャンペーンのご応募もありがとうございます！
+			tm := `キャンペーンのご応募ありがとうございます！
 「クーポン」とメッセージを送っていただくとクーポンが表示されます。`
 
 			messages = append(messages,
