@@ -190,5 +190,5 @@ func main() {
 	mux.HandleFunc("/callback", callback)
 	mux.HandleFunc("/campaign", showPage)
 
-	ridge.Run(":8080", "", mux)
+	ridge.Run(":8080", "", http.StripPrefix("/web", mux))
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -99,5 +100,5 @@ func main() {
 		return messages
 	}
 
-	ridge.Run(":8080", "/callback", handler)
+	ridge.Run(":8080", "", http.StripPrefix("/bot/callback", handler))
 }
