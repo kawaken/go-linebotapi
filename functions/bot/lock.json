@@ -69,8 +69,8 @@
         },
         {
             "name": "golang.org/x/net",
-            "branch": "master",
-            "revision": "10c134ea0df15f7e34d789338c7a2d76cc7a3ab9",
+            "branch": "release-branch.go1.6",
+            "revision": "62685c2d7ca23c807425dca88b11a3e2323dab41",
             "packages": [
                 "context",
                 "context/ctxhttp"
