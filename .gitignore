@@ -1,3 +1,5 @@
 /functions/*/vendor/
 env.json
 project.json
+/static/*.html
+
